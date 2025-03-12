@@ -16,7 +16,10 @@ app.use(cookieParser());
 // CORS setup
 app.use(
   cors({
-    origin: true,
+    origin: [
+      "https://evangadi-forum-frontend-page.onrender.com/",
+      "http://localhost:3000",
+    ],
     credentials: true,
   })
 );
