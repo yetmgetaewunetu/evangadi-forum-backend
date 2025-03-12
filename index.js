@@ -11,14 +11,11 @@ import cookieParser from "cookie-parser";
 
 dotenv.config();
 const app = express();
-const port = process.env.PORT || 5500;
+const port = process.env.PORT;
 
 app.use(
   cors({
-    origin: [
-      "https://evangadi-forum-frontend-page.onrender.com",
-      "http://localhost:3000",
-    ],
+    origin: "https://evangadi-forum-frontend-page.onrender.com",
     credentials: true,
   })
 );
