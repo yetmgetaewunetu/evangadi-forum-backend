@@ -12,19 +12,19 @@ dotenv.config();
 const app = express();
 const port = 5500;
 
-app.use(cookieParser());
-// CORS setup
 app.use(
   cors({
     origin: [
-      "https://evangadi-forum-frontend-page.onrender.com/",
+      "https://evangadi-forum-frontend-page.onrender.com",
       "http://localhost:3000",
     ],
     credentials: true,
   })
 );
-app.options("*", cors());
 
+app.use(cookieParser());
+// CORS setup
+app.options("*", cors());
 // Middleware to parse incoming JSON
 app.use(express.json());
 
