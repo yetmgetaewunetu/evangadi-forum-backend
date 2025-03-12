@@ -8,9 +8,10 @@ import answerRoute from "./routes/answerRoute.js";
 import authMiddleware from "./Middlewares/authMiddleware.js";
 import connect_db from "./lib/db.js";
 import cookieParser from "cookie-parser";
+
 dotenv.config();
 const app = express();
-const port = 5500;
+const port = process.env.PORT || 5500;
 
 app.use(
   cors({
@@ -21,24 +22,30 @@ app.use(
     credentials: true,
   })
 );
-
-app.use(cookieParser());
-// CORS setup
 app.options("*", cors());
-// Middleware to parse incoming JSON
-app.use(express.json());
 
-// Basic route
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://evangadi-forum-frontend-page.onrender.com"
+  );
+  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.header("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
+app.use(express.json());
+app.use(cookieParser());
+
 app.get("/", (req, res) => {
   res.send("Welcome to our backend server!");
 });
 
-// User and other routes
 app.use("/api/users", userRoutes);
 app.use("/api/questions", authMiddleware, questionRoute);
 app.use("/api/answers", authMiddleware, answerRoute);
 
-// Connect to the database and start the server
 connect_db()
   .then(() => {
     app.listen(port, () => {
