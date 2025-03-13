@@ -20,6 +20,7 @@ app.use(
   })
 );
 app.options("*", cors());
+app.use(cookieParser());
 
 app.use((req, res, next) => {
   res.header(
@@ -33,7 +34,6 @@ app.use((req, res, next) => {
 });
 
 app.use(express.json());
-app.use(cookieParser());
 
 app.get("/", (req, res) => {
   res.send("Welcome to our backend server!");

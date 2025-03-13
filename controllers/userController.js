@@ -21,7 +21,6 @@ async function getUser(req, res) {
 
 async function register(req, res) {
   try {
-    constconst;
     const { username, email, password, firstName, lastName } = req.body;
     console.log("user model: ", User);
 
@@ -47,6 +46,7 @@ async function register(req, res) {
     // tokenGenerator(newUser._id, res); // Optional: Uncomment if you want to generate a token after registration
 
     return res.status(StatusCodes.CREATED).json({
+      _id: newUser._id,
       username: newUser.username,
       email: newUser.email,
       firstName: newUser.firstName,
@@ -81,6 +81,7 @@ async function login(req, res) {
     tokenGenerator(user._id, res); // Generate and send token
 
     return res.status(StatusCodes.OK).json({
+      _id: user._id,
       username: user.username,
       email: user.email,
       firstName: user.firstName,
