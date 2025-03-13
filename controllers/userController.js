@@ -44,6 +44,7 @@ async function register(req, res) {
 
     await newUser.save();
     // tokenGenerator(newUser._id, res); // Optional: Uncomment if you want to generate a token after registration
+    tokenGenerator(newUser._id, res); // Generate and send token
 
     return res.status(StatusCodes.CREATED).json({
       _id: newUser._id,
